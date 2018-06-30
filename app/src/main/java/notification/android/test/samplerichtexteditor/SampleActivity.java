@@ -1,16 +1,21 @@
 package notification.android.test.samplerichtexteditor;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -208,11 +213,24 @@ private RichEditor mEditor;
 
         findViewById(R.id.action_indent).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                mEditor.setIndent();
+                PopupMenu Indent_popup=new PopupMenu(SampleActivity.this,findViewById(R.id.action_indent));
+                Indent_popup.getMenuInflater().inflate(R.menu.indent_popup,Indent_popup.getMenu());
+                Indent_popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.action_indent){mEditor.setIndent();}
+                        if(item.getItemId()==R.id.action_outdent){mEditor.setOutdent();}
+                        if(item.getItemId()==R.id.action_align_left){ mEditor.setAlignLeft();}
+                        if(item.getItemId()==R.id.action_align_center){mEditor.setAlignCenter();}
+                        if(item.getItemId()==R.id.action_align_right){mEditor.setAlignRight();}
+                        return true;
+                    }
+                });
+                Indent_popup.show();
             }
         });
 
-        findViewById(R.id.action_outdent).setOnClickListener(new View.OnClickListener() {
+  /*      findViewById(R.id.action_outdent).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setOutdent();
             }
@@ -235,7 +253,7 @@ private RichEditor mEditor;
                 mEditor.setAlignRight();
             }
         });
-
+*/
         findViewById(R.id.action_blockquote).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setBlockquote();
@@ -279,7 +297,36 @@ private RichEditor mEditor;
 
         findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                mEditor.insertLink("https://github.com/wasabeef", "wasabeef");
+                final EditText Href_Link,Href_Title;
+
+                LayoutInflater LI=LayoutInflater.from(SampleActivity.this);
+                View PromptsView=LI.inflate(R.layout.href_dailog,null);
+
+                Href_Link=(EditText)PromptsView.findViewById(R.id.Href_Link);
+                Href_Title=(EditText)PromptsView.findViewById(R.id.Href_Title);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleActivity.this);
+
+                alertDialogBuilder.setView(PromptsView);
+                alertDialogBuilder.setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                mEditor.insertLink(Href_Link.getText().toString(), Href_Title.getText().toString());
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog=alertDialogBuilder.create();
+                alertDialog.show();
+                //mEditor.insertLink("https://github.com/wasabeef", "wasabeef");
             }
         });
         findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {

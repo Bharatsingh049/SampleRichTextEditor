@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="indent"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/action_indent"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/indent"
+        />
+
+    <item
+        android:title="Outdent"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/action_outdent"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/outdent"
+        />
+
+    <item
+        android:title="Align_left"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/action_align_left"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/justify_left"
+        />
+
+    <item
+        android:title="Align_center"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/action_align_center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/justify_center"
+        />
+
+    <item
+        android:title="Align_right"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/action_align_right"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/justify_right"
+        />
+
+
+
+</menu>
