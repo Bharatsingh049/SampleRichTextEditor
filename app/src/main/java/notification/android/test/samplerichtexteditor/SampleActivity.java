@@ -8,8 +8,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import jp.wasabeef.richeditor.RichEditor;
@@ -122,6 +125,27 @@ private RichEditor mEditor;
             }
         });
 
+        findViewById(R.id.action_heading).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu heading_popup=new PopupMenu(SampleActivity.this,findViewById(R.id.action_heading));
+                heading_popup.getMenuInflater().inflate(R.menu.heading_menu,heading_popup.getMenu());
+                heading_popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.action_heading1){mEditor.setHeading(1);}
+                        if(item.getItemId()==R.id.action_heading2){mEditor.setHeading(2);}
+                        if(item.getItemId()==R.id.action_heading3){mEditor.setHeading(3);}
+                        if(item.getItemId()==R.id.action_heading4){mEditor.setHeading(4);}
+                        if(item.getItemId()==R.id.action_heading5){mEditor.setHeading(5);}
+                        if(item.getItemId()==R.id.action_heading6){mEditor.setHeading(6);}
+                        return true;
+                    }
+                });
+                heading_popup.show();
+            }
+        });
+/*
         findViewById(R.id.action_heading1).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setHeading(1);
@@ -157,7 +181,7 @@ private RichEditor mEditor;
                 mEditor.setHeading(6);
             }
         });
-
+     */
         findViewById(R.id.action_txt_color).setOnClickListener(new View.OnClickListener() {
             private boolean isChanged;
 
@@ -214,16 +238,26 @@ private RichEditor mEditor;
 
         findViewById(R.id.action_insert_bullets).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                mEditor.setBullets();
+                PopupMenu List_popoup=new PopupMenu(SampleActivity.this,findViewById(R.id.action_insert_bullets));
+                List_popoup.getMenuInflater().inflate(R.menu.oderedlist_menu,List_popoup.getMenu());
+                List_popoup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.action_insert_bullet){mEditor.setBullets();}
+                        if(item.getItemId()==R.id.action_insert_numbers){mEditor.setNumbers();}
+                        return true;
+                    }
+                });
+                List_popoup.show();
             }
         });
 
-        findViewById(R.id.action_insert_numbers).setOnClickListener(new View.OnClickListener() {
+  /*      findViewById(R.id.action_insert_numbers).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.setNumbers();
             }
         });
-
+*/
         findViewById(R.id.action_insert_image).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 Intent i = new Intent(

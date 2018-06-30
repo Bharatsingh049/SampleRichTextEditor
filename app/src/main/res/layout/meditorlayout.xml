@@ -107,7 +107,7 @@
             <ImageButton
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:id="@+id/action_heading1"
+                android:id="@+id/action_heading"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@null"
@@ -115,60 +115,7 @@
                 android:src="@drawable/h1"
                 />
 
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_heading2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h2"
-                />
 
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_heading3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h3"
-                />
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_heading4"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h4"
-                />
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_heading5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h5"
-                />
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_heading6"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h6"
-                />
 
             <ImageButton
                 android:padding="10dp"
@@ -257,17 +204,6 @@
                 android:background="@null"
                 android:contentDescription="@null"
                 android:src="@drawable/bullets"
-                />
-
-            <ImageButton
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/action_insert_numbers"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/numbers"
                 />
 
             <ImageButton
