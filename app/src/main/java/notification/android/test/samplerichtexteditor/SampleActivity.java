@@ -35,6 +35,39 @@ private RichEditor mEditor;
         //mEditor.setInputEnabled(false);
 
         mPreview = (TextView) findViewById(R.id.preview);
+        Initialize();
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Log.d( "onActivityResult: ",picturePath);
+            //mEditor.loadDataWithBaseURL(picturePath);
+           // mEditor.insertImage("http://img3.wikia.nocookie.net/__cb20150103173556/mario/images/c/cf/Legend-of-zelda-spirit-tracks-link-spirit-flute.jpg",
+             //       "Image");
+            mEditor.insertImage(picturePath,"Image");
+            //ImageView imageView = (ImageView) findViewById(R.id.imgView);
+            //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+        }
+    }
+
+    public void Initialize(){
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override public void onTextChange(String text) {
                 mPreview.setText(text);
@@ -199,8 +232,8 @@ private RichEditor mEditor;
 
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
 
-               // mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-                 //       "dachshund");
+                // mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
+                //       "dachshund");
             }
         });
 
@@ -214,34 +247,6 @@ private RichEditor mEditor;
                 mEditor.insertTodo();
             }
         });
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Log.d( "onActivityResult: ",picturePath);
-            //mEditor.loadDataWithBaseURL(picturePath);
-           // mEditor.insertImage("http://img3.wikia.nocookie.net/__cb20150103173556/mario/images/c/cf/Legend-of-zelda-spirit-tracks-link-spirit-flute.jpg",
-             //       "Image");
-            mEditor.insertImage(picturePath,"Image");
-            //ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-        }
     }
 
 }
