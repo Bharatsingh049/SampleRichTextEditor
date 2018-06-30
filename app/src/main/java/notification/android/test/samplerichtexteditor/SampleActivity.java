@@ -284,11 +284,46 @@ private RichEditor mEditor;
 */
         findViewById(R.id.action_insert_image).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                final EditText Image_Link;
+
+                LayoutInflater LI=LayoutInflater.from(SampleActivity.this);
+                View PromptsView=LI.inflate(R.layout.image_dialog,null);
+
+                Image_Link=(EditText)PromptsView.findViewById(R.id.Image_Link);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleActivity.this);
+
+                alertDialogBuilder.setView(PromptsView);
+                alertDialogBuilder.setCancelable(false)
+                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mEditor.insertImage(Image_Link.getText().toString(),"Image");
+                                //mEditor.insertLink(Href_Link.getText().toString(), Href_Title.getText().toString());
+
+                            }
+                        })
+                        .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(
+                                        Intent.ACTION_PICK,
+                                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                            }
+                        });
+
+                AlertDialog alertDialog=alertDialogBuilder.create();
+                alertDialog.show();
+
+
+
+
+
+
+
 
                 // mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
                 //       "dachshund");
