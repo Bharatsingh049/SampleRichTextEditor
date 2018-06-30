@@ -14,13 +14,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import jp.wasabeef.richeditor.RichEditor;
+import yuku.ambilwarna.AmbilWarnaDialog;
+import yuku.ambilwarna.widget.AmbilWarnaPreference;
 
 public class SampleActivity extends AppCompatActivity {
 private RichEditor mEditor;
     private TextView mPreview;
     private static int RESULT_LOAD_IMAGE = 1;
+    private int color = 0xffffff00;
+    private int bg_color = 0xffffff00;
+    //private boolean choice=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,7 +192,7 @@ private RichEditor mEditor;
             private boolean isChanged;
 
             @Override public void onClick(View v) {
-                mEditor.setTextColor(isChanged ? Color.BLACK : Color.RED);
+                color_selection(true);
                 isChanged = !isChanged;
             }
         });
@@ -195,7 +201,7 @@ private RichEditor mEditor;
             private boolean isChanged;
 
             @Override public void onClick(View v) {
-                mEditor.setTextBackgroundColor(isChanged ? Color.TRANSPARENT : Color.YELLOW);
+                color_selection(false);
                 isChanged = !isChanged;
             }
         });
@@ -282,5 +288,26 @@ private RichEditor mEditor;
             }
         });
     }
+
+    public void color_selection(final boolean choice){
+        AmbilWarnaDialog dialog= new AmbilWarnaDialog(SampleActivity.this, color, false, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Toast.makeText(getApplicationContext(), "cancel", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+                //SampleActivity.this.color = color;
+                if(choice==true){ mEditor.setTextColor(color);}
+                if(choice==false){mEditor.setTextBackgroundColor(color);}
+
+            }
+        });
+        dialog.show();
+
+    }
+
 
 }
